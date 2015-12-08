@@ -21,15 +21,17 @@ weatherApp.controller('homeController',['$scope','$location', 'cityService',
 
 
 //resource u burda kullaniyo data yi almak forecast ten
-weatherApp.controller('forecastController' ,['$scope', '$resource','$routeParams','cityService','weatherService',
-    function($scope,$resource,$routeParams, cityService,weatherService){
+weatherApp.controller('forecastController' ,['$scope','$routeParams','cityService','weatherService',
+    function($scope, $routeParams, cityService, weatherService){
 
         $scope.city = cityService.city;
 
         $scope.days = $routeParams.days || '2';
 
+   //     $scope.appid = "1633e3405e36e41dd5ee2fbc646fbef8";
 
-        $scope.weatherResult = weatherService.GetWeather({q:$scope.city, cnt:$scope.days});
+
+        $scope.weatherResult = weatherService.GetWeather({ q: $scope.city, cnt: $scope.days });
 
         //console.log($scope.weatherResult);
         $scope.convertToFahrenheit= function (degK) {
