@@ -1,5 +1,5 @@
 /**
- * Created by Matt on 1/17/2015.
+ * Created by Matt on 1/17/2016.
  */
 //controller for that 2 pages
 weatherApp.controller('homeController',['$scope','$location', 'cityService',
@@ -31,13 +31,22 @@ weatherApp.controller('forecastController' ,['$scope','$routeParams','cityServic
    //     $scope.appid = "1633e3405e36e41dd5ee2fbc646fbef8";
 
 
-        $scope.weatherResult = weatherService.GetWeather({ q: $scope.city, cnt: $scope.days });
+        $scope.weatherResult = weatherService.GetWeather($scope.city, $scope.days )
+        .then(function(res){
+           // console.log(JSON.stringify(res.data.list));
+          //  console.log(res.data.list);
+        $scope.weatherResult = res.data;
+         //  console.log($scope.weatherResult);
+           console.log(res);
+        });
 
-        //console.log($scope.weatherResult);
+
+
+
         $scope.convertToFahrenheit= function (degK) {
 
             return Math.round((1.8*(degK - 273)) + 32);
-        }
+        };
         //date convert returning date format from the APi long numbers
         $scope.convertToDate = function(dt) {
             return new Date(dt *1000);
